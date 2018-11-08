@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">NewsApp</string>
+    <string name="make_a_search">Make a Search</string>
+    <string name="powered_by_newsapi_org">Powered by -NewsAPI.ORG</string>
+    <string name="news_app_url_currently">News App URL Currently</string>
+    <string name="query_news_app">Use Key Word to Search in News App</string>
+    <string name="search">Refresh</string>
 </resources>
