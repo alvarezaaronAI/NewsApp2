@@ -21,12 +21,22 @@ public class JsonUtils {
             for(int art = 0; art < articlesSize; art++ ) {
                 //Strings for every Key
                 JSONObject a = articles.getJSONObject(art);
+                String authorTemp = a.getString("author");
                 String titleTemp = a.getString("title");
                 String descriptionTemp = a.getString("description");
+                String urlTemp = a.getString("url");
+                String urlImage = a.getString("urlToImage");
                 String dateTemp = a.getString("publishedAt");
-                Log.d(TAG, "parseNews: " + titleTemp  + descriptionTemp + dateTemp);
+
+                Log.d(TAG, "parseNews: \n"
+                        + authorTemp + "\n"
+                        + titleTemp + "\n"
+                        + descriptionTemp + "\n"
+                        + urlTemp + "\n"
+                        + urlImage + "\n"
+                        + dateTemp + "\n");
                 //Creating a NewsTemp
-                NewsItem tempNewsItem = new NewsItem(titleTemp, descriptionTemp, dateTemp);
+                NewsItem tempNewsItem = new NewsItem(authorTemp, titleTemp, descriptionTemp,urlTemp,urlImage,dateTemp);
                 //Adding to the NewsItemTemp
                 newsItemsTemp.add(tempNewsItem);
             }

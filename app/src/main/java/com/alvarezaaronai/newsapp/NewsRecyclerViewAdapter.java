@@ -18,7 +18,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
     final private NewsListItemClickListner mOnClickListener;
 
     public interface NewsListItemClickListner {
-        void onListItemListner(int clickedItemIndex);
+        void onListItemListener(int clickedItemIndex);
     }
     public NewsRecyclerViewAdapter(ArrayList<NewsItem> newsListIn , NewsListItemClickListner listener){
         mOnClickListener = listener;
@@ -69,7 +69,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
         @Override
         public void onClick(View v) {
             int clickedPosition = getAdapterPosition();
-            mOnClickListener.onListItemListner(clickedPosition);
+            mOnClickListener.onListItemListener(clickedPosition);
         }
     }
 }

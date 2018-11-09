@@ -1,5 +1,7 @@
 package com.alvarezaaronai.newsapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,13 +58,20 @@ public class MainActivity extends AppCompatActivity implements NewsRecyclerViewA
     }
 
     @Override
-    public void onListItemListner(int clickedItemIndex) {
+    public void onListItemListener(int clickedItemIndex) {
         if(mToast != null){
             mToast.cancel();
         }
-        String toToastMessage = "Item Clicked at position  :  " + clickedItemIndex;
+        //Store URL Link
+        String urlLink = mNewsItems.get(clickedItemIndex).getUrl();
+        //Create a toast
+        String toToastMessage = "Opening : " + urlLink ;
         mToast = Toast.makeText( MainActivity.this , toToastMessage, Toast.LENGTH_LONG);
         mToast.show();
+        //Start Browser with URL LINK
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse(urlLink));
+        startActivity(browserIntent);
     }
 
     public class NewsAppQueryTask extends AsyncTask<URL, Void, String> {
