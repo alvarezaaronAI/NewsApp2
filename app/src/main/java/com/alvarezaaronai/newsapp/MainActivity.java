@@ -9,18 +9,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NewsRecyclerViewAdapter.NewsListItemClickListner {
     //Log Cats
     private static final String TAG = "MainActivity";
     //Member variables
     private EditText mSearchBoxEditText;
     private TextView mUrlDisplayTextView;
-    private TextView mSearchResultsTextView;
+    private Toast mToast;
     //Member Variables Recycle View
     /*
      * References to RecyclerView and Adapter to reset the list to its
@@ -54,6 +55,16 @@ public class MainActivity extends AppCompatActivity {
         new NewsAppQueryTask().execute(newsAppSearchURL);
     }
 
+    @Override
+    public void onListItemListner(int clickedItemIndex) {
+        if(mToast != null){
+            mToast.cancel();
+        }
+        String toToastMessage = "Item Clicked at position  :  " + clickedItemIndex;
+        mToast = Toast.makeText( MainActivity.this , toToastMessage, Toast.LENGTH_LONG);
+        mToast.show();
+    }
+
     public class NewsAppQueryTask extends AsyncTask<URL, Void, String> {
 
         //Override the doInBackground method to perform the query. Return the results.
@@ -74,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String newsAppSearchResults) {
             if (newsAppSearchResults != null && !newsAppSearchResults.equals("")) {
                 mNewsItems = JsonUtils.parseNews(newsAppSearchResults);
-                mAdapter = new NewsRecyclerViewAdapter(mNewsItems);
+                mAdapter = new NewsRecyclerViewAdapter(mNewsItems, MainActivity.this);
                 mNewsItemList.setAdapter(mAdapter);
             }
         }
