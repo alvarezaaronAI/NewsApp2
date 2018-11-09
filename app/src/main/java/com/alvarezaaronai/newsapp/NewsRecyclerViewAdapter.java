@@ -14,9 +14,14 @@ import java.util.ArrayList;
 
 public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerViewAdapter.NewsItemViewHolder> {
     private static final String TAG = "NewsRecyclerViewAdapter";
-    private ArrayList<NewsItem> mNewsList;
+     ArrayList<NewsItem> mNewsList;
+    final private NewsListItemClickListner mOnClickListener;
 
-    public NewsRecyclerViewAdapter(ArrayList<NewsItem> newsListIn){
+    public interface NewsListItemClickListner {
+        void onListItemListner(int clickedItemIndex);
+    }
+    public NewsRecyclerViewAdapter(ArrayList<NewsItem> newsListIn , NewsListItemClickListner listener){
+        mOnClickListener = listener;
         mNewsList = newsListIn;
     }
 
@@ -46,7 +51,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
     }
 
     // Class that creates a NewsItemViewHolder
-    public class NewsItemViewHolder extends RecyclerView.ViewHolder {
+    public class NewsItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         //Member Variables for the Layout
         private TextView mTitle;
         private TextView mDescription;
@@ -58,7 +63,13 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
             mTitle = (TextView) itemView.findViewById(R.id.tv_news_title);
             mDescription = (TextView) itemView.findViewById(R.id.tv_news_description);
             mDate = (TextView) itemView.findViewById(R.id.tv_news_date);
+            itemView.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View v) {
+            int clickedPosition = getAdapterPosition();
+            mOnClickListener.onListItemListner(clickedPosition);
+        }
     }
 }
