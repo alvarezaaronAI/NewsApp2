@@ -12,8 +12,11 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    //Log Cats
+    private static final String TAG = "MainActivity";
     //Member variables
     private EditText mSearchBoxEditText;
     private TextView mUrlDisplayTextView;
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private NewsRecyclerViewAdapter mAdapter;
     private RecyclerView mNewsItemList;
+    //List of Items
+    ArrayList<NewsItem> mNewsItems;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,15 +37,14 @@ public class MainActivity extends AppCompatActivity {
         //Setting Member Variables
         mSearchBoxEditText = (EditText) findViewById(R.id.et_search_box);
         mUrlDisplayTextView = (TextView) findViewById(R.id.tv_url_display);
-        mSearchResultsTextView = (TextView) findViewById(R.id.tv_newsApp_search_results_json);
+        mNewsItemList = (RecyclerView) findViewById(R.id.news_recyclerview);
+        //mSearchResultsTextView = (TextView) findViewById(R.id.tv_newsApp_search_results_json);
         //------------------------
         //Creating Recycle View---
         //A LinearLayoutManager is responsible for measuring and positioning item views within a RecyclerView into a linear list.
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mNewsItemList.setLayoutManager(layoutManager);
-        //The NewsRecycleViewAdapter is responsible for displaying each item in the list. NewsRecyclerViewAdapter(LIST it will display, To what Context)
-        mAdapter = new NewsRecyclerViewAdapter();
-        mNewsItemList.setAdapter(mAdapter);
+        mNewsItemList.setHasFixedSize(true);
         //------------------------
     }
     private void makeNewsAppSearchQuery() {
@@ -69,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String newsAppSearchResults) {
             if (newsAppSearchResults != null && !newsAppSearchResults.equals("")) {
-                mSearchResultsTextView.setText(newsAppSearchResults);
+                mNewsItems = JsonUtils.parseNews(newsAppSearchResults);
+                mAdapter = new NewsRecyclerViewAdapter(mNewsItems);
+                mNewsItemList.setAdapter(mAdapter);
             }
         }
     }
@@ -83,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemThatWasClickedId = item.getItemId();
-        if (itemThatWasClickedId == R.id.action_search) {
+        if (itemThatWasClickedId == R.id.action_refresh) {
             makeNewsAppSearchQuery();
             return true;
         }

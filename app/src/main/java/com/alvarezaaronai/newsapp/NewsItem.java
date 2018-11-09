@@ -27,8 +27,19 @@ public class NewsItem {
         date = "2018-11-08T09:34:58Z";
     }
 
-    public NewsItem (String titleIn, String authorIn, String descriptionIn, String urlIn, String imageUrlIn, String dateIn){
+    public NewsItem(String title, String author, String description, String url, String imageUrl, String date) {
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.url = url;
+        this.imageUrl = imageUrl;
+        this.date = date;
+    }
 
+    public NewsItem(String titleTemp, String descriptionTemp, String dateTemp) {
+        this.title = titleTemp;
+        this.description = descriptionTemp;
+        this.date = dateTemp;
     }
 
     public String getTitle() {
