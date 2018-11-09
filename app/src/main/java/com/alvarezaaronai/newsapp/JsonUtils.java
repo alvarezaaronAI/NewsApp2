@@ -16,17 +16,17 @@ public class JsonUtils {
         try {
             JSONObject news = new JSONObject(JSONString);
             JSONArray articles = news.getJSONArray("articles");
+            Log.d(TAG, "parseNews: --- --- " + articles);
 
-            int articlesSize = articles.length();
-            for(int art = 0; art < articlesSize; art++ ) {
+            for(int art = 0; art < articles.length(); art++ ) {
                 //Strings for every Key
                 JSONObject a = articles.getJSONObject(art);
-                String authorTemp = a.getString("author");
                 String titleTemp = a.getString("title");
                 String descriptionTemp = a.getString("description");
+                String dateTemp = a.getString("publishedAt");
+                String authorTemp = a.getString("author");
                 String urlTemp = a.getString("url");
                 String urlImage = a.getString("urlToImage");
-                String dateTemp = a.getString("publishedAt");
 
                 Log.d(TAG, "parseNews: \n"
                         + authorTemp + "\n"
@@ -36,7 +36,7 @@ public class JsonUtils {
                         + urlImage + "\n"
                         + dateTemp + "\n");
                 //Creating a NewsTemp
-                NewsItem tempNewsItem = new NewsItem(authorTemp, titleTemp, descriptionTemp,urlTemp,urlImage,dateTemp);
+                NewsItem tempNewsItem = new NewsItem("Title" + titleTemp, descriptionTemp,dateTemp,authorTemp,urlTemp,urlImage);
                 //Adding to the NewsItemTemp
                 newsItemsTemp.add(tempNewsItem);
             }

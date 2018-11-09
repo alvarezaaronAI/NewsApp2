@@ -16,6 +16,7 @@ public class NetworkUtils {
     final static String NEWSAPP_BASE_URL =
             "https://newsapi.org/v1/articles";
     final static String PARAM_QUERY = "source";
+    final static String QUERY_VAL = "the-next-web";
     final static String PARAM_SORT = "sortBy";
     final static String SORT_VAL = "latest";
     final static String PARAM_API = "apiKey";
@@ -23,7 +24,7 @@ public class NetworkUtils {
 
     public static URL buildUrl(String newsAppSearchQuery) {
         Uri builtUri = Uri.parse(NEWSAPP_BASE_URL).buildUpon()
-                .appendQueryParameter(PARAM_QUERY, newsAppSearchQuery)
+                .appendQueryParameter(PARAM_QUERY, QUERY_VAL)
                 .appendQueryParameter(PARAM_SORT,SORT_VAL)
                 .appendQueryParameter(PARAM_API,APIKEY_VAL)
                 .build();
