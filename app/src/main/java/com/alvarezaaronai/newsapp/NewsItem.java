@@ -27,7 +27,7 @@ public class NewsItem {
         date = "2018-11-08T09:34:58Z";
     }
 
-    public NewsItem(String author,String title, String description, String url, String imageUrl, String date) {
+    public NewsItem(String title, String description,String date, String author , String url, String imageUrl) {
         this.title = title;
         this.author = author;
         this.description = description;

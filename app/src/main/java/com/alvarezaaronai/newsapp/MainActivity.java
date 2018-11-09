@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements NewsRecyclerViewA
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemThatWasClickedId = item.getItemId();
-        if (itemThatWasClickedId == R.id.action_refresh) {
+        if (itemThatWasClickedId == R.id.action_search) {
             makeNewsAppSearchQuery();
             return true;
         }
