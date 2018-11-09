@@ -14,12 +14,9 @@ import java.util.ArrayList;
 
 public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerViewAdapter.NewsItemViewHolder> {
     private static final String TAG = "NewsRecyclerViewAdapter";
-    ArrayList<NewsItem> mNewsList;
+    private ArrayList<NewsItem> mNewsList;
 
     public NewsRecyclerViewAdapter(ArrayList<NewsItem> newsListIn){
-        for(int x = 0; x > newsListIn.size() ; x++){
-            Log.d(TAG, "NewsRecyclerViewAdapter: " + newsListIn.get(x).getTitle() );
-        }
         mNewsList = newsListIn;
     }
 
