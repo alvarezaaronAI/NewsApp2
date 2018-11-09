@@ -5,4 +5,7 @@
     <string name="news_app_url_currently">News App URL Currently</string>
     <string name="query_news_app">Use Key Word to Search in News App</string>
     <string name="search">Refresh</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="date">Date</string>
 </resources>
